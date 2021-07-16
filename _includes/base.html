@@ -1,59 +1,49 @@
 ---
 site: Pet Photos
-text: Enjoy the gallery of photos we have for you!
-photo_location_name: true
 ---
 <head>
     <link rel="stylesheet" href="https://unpkg.com/mvp.css">
-
 </head>
-<body style="background-color:{{color_keyword}};">
-    {% include header.html %}
-    <h1>{{ site }}</h1>
-    <h2>{{ text }} <h2>
 
+<body style="background-color: {{hex}};"></body>
+
+<body>
+
+
+    <h1>{{ site }}</h1>
 
     {% unless page.url == '/' %}
+    	<a href="/">Home</a>
 
-    {% endunless %}
+        {% endunless %}
+
 
     {{ content }}
+    {% unless page.url == '/' %}
+    <figure>
+    <figcaption> Type of camera used: {{ exif_camera_model }} </figcaption>
+    <figcaption>Photo ID: {{ photo_id }}</figcaption>
+ </figure>
+    {% endunless %}
 
-    {% for photo in collections.photos %}
-
-
-    {% endfor %}
-
+    {% if page.url == '/' %}
     <ul>
         {% for photo in collections.photos %}
+
             <li>
                 <a href="{{ photo.url }}">
                     A {{ photo.data.photo_keyword }} photo
                     by {{ photo.data.photographer_first_name}} {{ photo.data.photographer_last_name }}
                 </a>
             </li>
-
-            This photo is taken
-              by {{ photo.data.photographer_first_name}} {{ photo.data.photographer_last_name }}
-
-          <br>
-
-          {% if photo.data.photo_location_name %}
-            Location:
-              {{ photo.data.photo_location_name}}
-          {%endif%}
-
-
-      <br>
-
-      This beautiful country of {{ photo.data.photo_location_country}} 
-    <br>
-
         {% endfor %}
+
     </ul>
+    {% endif %}
 
 
-
-
-
+    <footer>
+        <p>Site Created by Alfredo Alcantar, Arsal Khan, Josephine Overbeek, Pedro Hernandez</p>
+        <p>Contact: <a href="">Group3@csu.fullerton.edu.com</a></p>
+    </footer>
 </body>
