@@ -1,18 +1,28 @@
 ---
 site: Pet Photos
+text: Enjoy the gallery of photos we have for you!
+photo_location_name: true
 ---
 <head>
     <link rel="stylesheet" href="https://unpkg.com/mvp.css">
-</head>
-<body>
 
+</head>
+<body style="background-color:{{color_keyword}};">
+    {% include header.html %}
     <h1>{{ site }}</h1>
+    <h2>{{ text }} <h2>
+
 
     {% unless page.url == '/' %}
-    	<a href="/">Home</a>
+
     {% endunless %}
 
     {{ content }}
+
+    {% for photo in collections.photos %}
+
+
+    {% endfor %}
 
     <ul>
         {% for photo in collections.photos %}
@@ -22,7 +32,25 @@ site: Pet Photos
                     by {{ photo.data.photographer_first_name}} {{ photo.data.photographer_last_name }}
                 </a>
             </li>
+
+            This photo is taken
+              by {{ photo.data.photographer_first_name}} {{ photo.data.photographer_last_name }}
+
+          <br>
+
+          {% if photo.data.photo_location_name %}
+            Location:
+              {{ photo.data.photo_location_name}}
+          {%endif%}
+
+
+      <br>
+
         {% endfor %}
     </ul>
+
+
+
+
 
 </body>
